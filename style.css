@@ -6,379 +6,396 @@
 }
 
 :root {
-    --bg-color: white;
-    --text-color: black;
-    --nav-bg: #2C3E50;
-    --nav-text: #ECF0F1;
-    --box-border: grey;
-    --box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    --box-color: #2C3E50;
-    --box-hover: rgb(178, 119, 233);
-    --game-bg: linear-gradient(to right, #f7cac9, #92a8d1);
-    --win-line: rgb(222, 142, 229);
-    --button-bg: #1f9b1b;
-    --button-hover: #2E86C1;
-    --difficulty-bg: #1e3a42;
-    --difficulty-hover: #3142df;
+    --bg-color: #f0f2f5;
+    --text-color: #1a1a1a;
+    --nav-bg: #ffffff;
+    --nav-text: #1a1a1a;
+    --box-border: #e4e6eb;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --box-color: #1a1a1a;
+    --box-hover: #f0f2f5;
+    --game-bg: linear-gradient(135deg, #ffffff 0%, #f0f2f5 100%);
+    --win-line: #4f46e5;
+    --button-bg: #4f46e5;
+    --button-hover: #4338ca;
+    --difficulty-bg: #4f46e5;
+    --difficulty-hover: #4338ca;
 }
 
 .dark-mode {
-    --bg-color: #1e1e1e;
-    --text-color: white;
-    --nav-bg: #111;
-    --nav-text: #eee;
-    --box-border: #333;
-    --box-shadow: 4px 4px 10px rgba(255, 255, 255, 0.1);
-    --box-color: #eee;
-    --box-hover: #555;
-    --game-bg: #222;
-    --win-line: #888;
-    --button-bg: #333;
-    --button-hover: #555;
-    --difficulty-bg: #333;
-    --difficulty-hover: #555;
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --nav-bg: #1e1e1e;
+    --nav-text: #ffffff;
+    --box-border: #333333;
+    --box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+    --box-color: #ffffff;
+    --box-hover: #2d2d2d;
+    --game-bg: linear-gradient(135deg, #1e1e1e 0%, #121212 100%);
+    --win-line: #6366f1;
+    --button-bg: #6366f1;
+    --button-hover: #4f46e5;
+    --difficulty-bg: #6366f1;
+    --difficulty-hover: #4f46e5;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: 0.3s;
-}
-
-.section {
-    background: var(--game-bg);
-/* Section Styles */
-.section {
-    background: linear-gradient(to right, #f7cac9, #92a8d1);
-    position: relative;
-    height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 nav {
     background-color: var(--nav-bg);
     color: var(--nav-text);
-/* Navigation Styles */
-nav {
-    background-color: #2C3E50;
-    color: #ECF0F1;
-    height: 85px;
-    font-size: 20px;
+    height: 70px;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    transition: 0.3s;
-    padding: 0 20px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    position: relative; /* Ensure proper positioning of buttons */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
 }
 
-/* Navigation List */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Logo Styling */
 .nav-logo {
     display: flex;
     align-items: center;
-}
-
-.nav-logo img {
-    height: 70px;
+    gap: 12px;
 }
 
 .logo {
-    width: 75px;
-    height: 75px;
-    margin-right: 12px;
-    border-radius: 20%;
-    border-radius: 20%; /* Makes the logo circular */
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .site-title {
-    font-weight: bold;
-    white-space: nowrap;
+    font-weight: 600;
+    font-size: 1.25rem;
 }
 
-.info {
-    font-size: 30px;
-}
-
-}
-
-/* Button Container Styling */
-.nav-buttons {
-    display: flex;
-    align-items: center; /* Vertically center the buttons */
-    gap: 8px; /* Reduced gap between the buttons */
-    position: absolute;
-    right: 20px;
-    top: 20px;
-}
-
-/* Individual Button Styling */
-button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover Effects for Buttons */
-button:hover {
-    background-color: #45a049;
-}
-
-/* Game Container */
 .gamecontainer {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    gap: 4rem;
+    flex-wrap: wrap;
 }
 
-/* Grid Layout for Tic Tac Toe */
 .container {
-    margin-top: 50px;
+    background: var(--nav-bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     display: grid;
+    grid-template: repeat(3, minmax(80px, 120px)) / repeat(3, minmax(80px, 120px));
+    gap: 8px;
     position: relative;
-    grid-template-rows: repeat(3, 10vw);
-    grid-template-columns: repeat(3, 10vw);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-4px);
+}
+
+.container:hover .box:not(:hover) {
+    opacity: 0.8;
 }
 
 .box {
     border: 2px solid var(--box-border);
-    box-shadow: var(--box-shadow);
-    font-size: 8vw;
+    border-radius: 12px;
+    font-size: calc(2rem + 2vw);
     color: var(--box-color);
-/* Box Styling */
-.box {
-    border: 2px solid grey;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
-    font-size: 8vw;
-    color: #2C3E50;
+    background: var(--nav-bg);
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 5px;
-    transition: 0.3s;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .box:hover {
-    background-color: var(--box-hover);
+    background: var(--box-hover);
+    transform: scale(0.98);
 }
 
+.box span {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease;
 }
 
-/* Box Hover Effect */
-.box:hover {
-    background-color: rgb(178, 119, 233);
+.box span.show {
+    opacity: 1;
+    transform: scale(1);
 }
 
-/* Game Info Container */
+.box.winner {
+    background: var(--button-bg);
+    color: white;
+    animation: winner 0.5s ease-in-out infinite;
+}
+
 .gameinfo {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 1.5rem;
     align-items: center;
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-/* Header Styling */
 .gameinfo h1 {
-    margin-bottom: 10px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 2.5rem;
-    color: var(--box-color); /* Use variable here */
-    transition: 0.3s;
-}
-
-.imgbox img {
-    width: 0;
-    transition: width 1s ease-in-out;
-}
-
-
-/* Turn Indicator Styling */
-.turnchange {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.turnchange span {
-    color: var(--box-color);
-    color: #253647;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 2rem;
-    margin-bottom: 10px;
-    /* transition: 0.3s; */
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
 }
 
-#reset{
-/* Button Styles for Reset and Play with Computer */
-#reset {
-    width: 60%;
-    margin: 10px;
-    background: #1f9b1b;
-    color: #FFFFFF;
-    padding: 6px 10px;
-    border-radius: 10px;
+button {
+    background: var(--button-bg);
+    color: white;
     border: none;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
     font-weight: 600;
-    font-size: 16px;
-    transition: all 0.3s ease-in-out;
-}
-
-#bot {
-    background: #1f9b1b;
-    color: #FFFFFF;
-    border-radius: 10px;
-    padding: 10px;
-    border: none;
-    font-weight: 600;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    display: flex;
-    width: 70%;
-    font-size: 14px;
-    transition: all 0.3s ease-in-out;
-}
-
-.turnchange button:hover {
-    background-color: var(--button-hover);
-/* Hover Effect for Buttons in Turn Info */
-.turnchange button:hover {
-    background-color: #2E86C1;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: var(--button-hover);
+    transform: translateY(-2px);
 }
 
 .line {
     background-color: var(--win-line);
-/* Line between grid */
-.line {
-    background-color: rgb(222, 142, 229);
     height: 4px;
     width: 0;
     position: absolute;
-    transition: width 1s ease-in-out;
+    transition: width 0.6s ease-in-out;
 }
 
-/* Media Queries for Small Screens */
-@media screen and (max-width: 800px) {
+.imgbox img {
+    max-width: 200px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.imgbox img.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.difficulty-controls {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    opacity: 0;
+    height: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.difficulty-controls.show {
+    opacity: 1;
+    height: 40px;
+    transform: translateY(0);
+    margin-bottom: 1rem;
+}
+
+.difficulty-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background: var(--nav-bg);
+    color: var(--text-color);
+    border: 2px solid var(--button-bg);
+    opacity: 0.8;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 90px;
+}
+
+.difficulty-btn:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    background: var(--button-bg);
+    color: white;
+}
+
+.difficulty-btn.active {
+    opacity: 1;
+    background: var(--button-bg);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+#bot.active {
+    background: var(--button-hover);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.feedback-btn {
+    margin-left: 0.5rem;
+}
+
+.boxtext {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: calc(3rem + 2vw);
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.boxtext:not(:empty) {
+    opacity: 1;
+    transform: scale(1);
+    animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.boxtext.pop-in {
+    animation: pop-in 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+.boxtext.X {
+    color: #4f46e5;
+}
+
+.boxtext.O {
+    color: #dc2626;
+}
+
+.info {
+    font-size: 1.25rem;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    background: var(--nav-bg);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.info:not(:empty) {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.turnchange {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
     .gamecontainer {
-        flex-wrap: wrap;
+        gap: 2rem;
+        padding: 1rem;
     }
 
-    .gameinfo {
-        margin-top: 34px;
+    .container {
+        grid-template: repeat(3, minmax(60px, 90px)) / repeat(3, minmax(60px, 90px));
+        padding: 1rem;
     }
 
     .gameinfo h1 {
         font-size: 1.5rem;
     }
 
-    .container {
-        display: grid;
-        grid-template-rows: repeat(3, 30vm);
-        grid-template-columns: repeat(3, 30vm);
+    nav {
+        padding: 0 16px;
+    }
+
+    .site-title {
+        font-size: 1rem;
+    }
+
+    .boxtext {
+        font-size: calc(2rem + 2vw);
+    }
+
+    button {
+        min-width: 120px;
+        padding: 0.5rem 1rem;
     }
 }
 
-/* Dark Mode Styles */
-:root {
-    --bg-color: white;
-    --text-color: black;
-    --button-bg: lightgray;
-    --game-bg: bisque;
-}
-
-.dark-mode {
-    --bg-color: #1e1e1e;
-    --text-color: white;
-    --button-bg: gray;
-    --game-bg: #2c2c2c;
-}
-
+/* Dark Mode Toggle Animation */
 .toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: max(10px, 2vw);
-    background: #4285cd;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    z-index: 1000;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-@media (max-width: 480px) {
-    .toggle-btn {
-        top: 20px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
-    }
-}
-
-#easy, #medium, #hard {
-    background-color: var(--difficulty-bg);
-/* Dark Mode Button Styling */
-#togglebtn {
-    background-color: #FF5733;
-    color: #FFFFFF;
-    box-shadow: 0px 4px 10px rgba(255, 87, 51, 0.4);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: bold;
-    padding: 10px;
+    font-size: 1.25rem;
+    background: var(--button-bg);
+    color: white;
     cursor: pointer;
-    border-radius: 9px;
-    transition: all 0.3s ease;
-}
-
-/* Hover Effect for Dark Mode Button */
-#togglebtn:hover {
-    background-color: #E74C3C;
-    box-shadow: 0px 6px 15px rgba(255, 87, 51, 0.6);
-    transform: translateY(-2px);
-}
-
-/* Button Styling for Difficulty Levels */
-#easy,
-#medium,
-#hard {
-    background-color: #1e3a42;
-    color: #ffffff;
-    margin-top: 10px;
+    transition: all 0.15s ease; /* Made transition faster */
     border: none;
-    border-radius: 2px;
-    padding: 10px;
-    margin-right: 10px;
-
-
 }
 
-#easy:hover,
-#medium:hover,
-#hard:hover {
-    background-color: #3142df;
+.toggle-btn:hover {
+    transform: rotate(10deg) scale(1.05); /* Reduced rotation and scale */
+    background: var(--button-hover);
+}
+
+/* Winner Animation */
+@keyframes winner {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.winner {
+    animation: winner 0.5s ease-in-out;
+}
+
+/* Pop-in animation for new moves */
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    70% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
 }

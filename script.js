@@ -14,7 +14,8 @@ const info = document.querySelector('.info');
 const resetButton = document.getElementById("reset");
 const botButton = document.getElementById("bot");
 
-const changeturn = () => (turn === "X" ? "0" : "X");
+// Change "0" to "O" in the turn change function
+const changeturn = () => (turn === "X" ? "O" : "X");
 
 // Function to Check for a Win
 const checkwin = () => {
@@ -26,6 +27,7 @@ const checkwin = () => {
     ];
 
     let winnerFound = false;
+    let winningSymbol = '';
     
     wins.forEach(e => {
         if (
@@ -33,12 +35,19 @@ const checkwin = () => {
             boxtext[e[0]].innerText === boxtext[e[1]].innerText &&
             boxtext[e[1]].innerText === boxtext[e[2]].innerText
         ) {
-            info.innerText = boxtext[e[0]].innerText + " Won!";
+            winningSymbol = boxtext[e[0]].innerText;
             isgameover = true;
             gameover.play();
             document.querySelector('.imgbox img').style.width = "200px";
             disableBoxes();
             winnerFound = true;
+
+            // Set the win message based on who actually won
+            if (isBotMode) {
+                info.innerText = winningSymbol === "X" ? "You Won!" : "Computer Won!";
+            } else {
+                info.innerText = winningSymbol + " Won!";
+            }
         }
     });
 
@@ -71,6 +80,7 @@ Array.from(boxes).forEach(element => {
     element.addEventListener('click', () => {
         if (boxtext.innerText === '' && !isgameover) {
             boxtext.innerText = turn;
+            boxtext.classList.add(turn); // Add class based on turn
             turn = changeturn();
             audioTurn.play();
             checkwin();
@@ -79,7 +89,7 @@ Array.from(boxes).forEach(element => {
                 info.innerText = "Turn For " + turn;
 
                 // If Bot Mode is ON and it's Bot's turn
-                if (isBotMode && turn === "0") {
+                if (isBotMode && turn === "O") {
                     setTimeout(botMove, 500); // Small delay for realism
                 }
             }
@@ -91,15 +101,19 @@ Array.from(boxes).forEach(element => {
 resetButton.addEventListener('click', resetGame);
 
 function resetGame() {
-    document.querySelectorAll('.boxtext').forEach(element => element.innerText = "");
+    document.querySelectorAll('.boxtext').forEach(element => {
+        element.innerText = "";
+        element.classList.remove('X', 'O', 'pop-in'); // Remove both classes and animation class
+    });
     turn = "X";
     isgameover = false;
     enableBoxes();
     document.querySelector('.imgbox img').style.width = "0px";
-    info.innerText = "Turn for " + turn;
-
-    if (isBotMode && turn === "0") {
-        setTimeout(botMove, 500);
+    
+    if (isBotMode) {
+        info.innerText = `Playing against ${botLevel.charAt(0).toUpperCase() + botLevel.slice(1)} Computer (Your turn)`;
+    } else {
+        info.innerText = "Turn for X";
     }
 }
 
@@ -107,40 +121,60 @@ function resetGame() {
 
 // Play with Bot Button
 botButton.addEventListener('click', () => {
+    // Show difficulty controls
+    const difficultyControls = document.querySelector('.difficulty-controls');
+    difficultyControls.classList.add('show');
+    
+    // Update bot button text
+    botButton.textContent = 'Playing vs Computer';
+    botButton.classList.add('active');
 
-    let existingLevels = document.querySelector('.level');
-    if (existingLevels) {
-        existingLevels.remove();
+    // Add active class to current difficulty
+    const difficultyBtns = document.querySelectorAll('.difficulty-btn');
+    difficultyBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.id === botLevel) {
+            btn.classList.add('active');
+        }
+        // Add click handlers for difficulty buttons
+        btn.addEventListener('click', () => {
+            difficultyBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            startBotGame(btn.id);
+        });
+    });
+
+    // Start game if not already in bot mode
+    if (!isBotMode) {
+        startBotGame(botLevel);
     }
-
-
-    const levels = document.createElement('div');
-    levels.innerHTML = `
-        <div class="level">
-            <button id="easy">Easy</button>
-            <button id="medium">Medium</button>
-            <button id="hard">Hard</button>
-        </div>
-    `;
-    turnchange.appendChild(levels);
-
-    document.getElementById("easy").addEventListener("click", () => startBotGame("easy"));
-    document.getElementById("medium").addEventListener("click", () => startBotGame("medium"));
-    document.getElementById("hard").addEventListener("click", () => startBotGame("hard"));
 });
 
 // Start Bot Mode
 const startBotGame = (level) => {
     botLevel = level;
     isBotMode = true;
-    turn = "X";
     resetGame();
+    
+    // Update UI to show current mode
+    info.innerText = `Playing against ${level.charAt(0).toUpperCase() + level.slice(1)} Computer (You: X, Computer: O)`;
+    
+    // Disable boxes during computer's turn
+    if (turn === "O") {
+        disableBoxes();
+        setTimeout(() => {
+            botMove();
+            enableBoxes();
+        }, 500);
+    }
 };
 
-// Bot Move Logic
+// Improved Bot Move function
 const botMove = () => {
+    if (isgameover) return;
+    
     let board = Array.from(document.getElementsByClassName('boxtext')).map(b => b.innerText);
-    let botSymbol = "0", playerSymbol = "X";
+    let botSymbol = "O", playerSymbol = "X";
 
     let move;
     if (botLevel === "easy") {
@@ -152,13 +186,19 @@ const botMove = () => {
     }
 
     if (move !== undefined) {
-        document.getElementsByClassName("boxtext")[move].innerText = botSymbol;
-        turn = changeturn();
+        let boxtext = document.getElementsByClassName("boxtext")[move];
+        boxtext.innerText = botSymbol;
+        boxtext.classList.add(botSymbol);
         audioTurn.play();
-        checkwin();
+        
+        // Add animation class
+        boxtext.classList.add('pop-in');
+        setTimeout(() => boxtext.classList.remove('pop-in'), 300);
 
+        checkwin();
         if (!isgameover) {
-            info.innerText = "Turn For " + turn;
+            turn = changeturn();
+            info.innerText = "Your turn (X)";
         }
     }
 };
